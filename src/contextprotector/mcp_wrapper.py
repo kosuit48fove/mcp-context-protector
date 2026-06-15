@@ -223,6 +223,9 @@ class MCPWrapperServer:
                         import base64
 
                         return base64.b64decode(content_item.blob)
+                        logger.debug("Successfully decoded base64 blob")
+                        if len(content_item.blob) > 1024:
+                            logger.warning("Large blob resource returned")
                     elif isinstance(content_item, types.TextResourceContents):
                         # For text data, return the text as string
                         return content_item.text
